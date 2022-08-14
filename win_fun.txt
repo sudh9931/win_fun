@@ -99,3 +99,23 @@ from ineuron_students ) as test where row_num = 1
 select student_id , student_batch , student_stream,students_marks ,
 row_number() over(partition by student_batch order by students_marks desc ) as 'row_num' 
 from ineuron_students 
+
+select student_id , student_batch , student_stream,students_marks ,
+row_number() over(order by students_marks desc) as 'row_number',
+rank() over(order by students_marks desc ) as 'row_rank' 
+from ineuron_students 
+
+
+select * from (select student_id , student_batch , student_stream,students_marks ,
+row_number() over(partition by student_batch order by students_marks desc) as 'row_number',
+rank() over(partition by student_batch order by students_marks desc ) as 'row_rank' 
+from ineuron_students ) as test where row_rank = 1
+
+
+select * from (select student_id , student_batch , student_stream,students_marks ,
+row_number() over(partition by student_batch order by students_marks desc) as 'row_number',
+rank() over(partition by student_batch order by students_marks desc ) as 'row_rank',
+dense_rank() over( partition by student_batch order by students_marks desc) as 'dense_rank'
+from ineuron_students ) as test where `dense_rank` = 3
+
+
