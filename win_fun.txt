@@ -30,3 +30,12 @@ insert into ineuron_students values(100 ,'fsda' , 'saurabh','cs',80,'saurabh@gma
 (117 ,'fsbc' , 'chaitra','ECE',23,'chaitra@gmail.com'),
 (118 ,'fsbc' , 'pranay','ECE',45,'pranay@gmail.com'),
 (119 ,'fsbc' , 'sandeep','ECE',65,'sandeep@gmail.com')
+
+
+select student_batch ,sum(students_marks) from ineuron_students group by student_batch
+select student_batch ,min(students_marks) from ineuron_students group by student_batch
+select student_batch ,max(students_marks) from ineuron_students group by student_batch
+select student_batch ,avg(students_marks) from ineuron_students group by student_batch
+select count(student_batch) from ineuron_students
+select count(distinct student_batch) from ineuron_students
+select student_batch , count(*) from ineuron_students group by student_batch
