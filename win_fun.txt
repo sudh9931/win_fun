@@ -1,7 +1,5 @@
 create database win_fun
 use win_fun
-
-
 create table ineuron_students(
 student_id int ,
 student_batch varchar(40),
@@ -9,6 +7,10 @@ student_name varchar(40),
 student_stream varchar(30),
 students_marks int ,
 student_mail_id varchar(50))
+
+insert into ineuron_students values(101 ,'fsda' , 'saurabh','cs',80,'saurabh@gmail.com')
+
+select * from ineuron_students
 
 
 insert into ineuron_students values(100 ,'fsda' , 'saurabh','cs',80,'saurabh@gmail.com'),
@@ -31,6 +33,7 @@ insert into ineuron_students values(100 ,'fsda' , 'saurabh','cs',80,'saurabh@gma
 (118 ,'fsbc' , 'pranay','ECE',45,'pranay@gmail.com'),
 (119 ,'fsbc' , 'sandeep','ECE',65,'sandeep@gmail.com')
 
+select * from ineuron_students
 
 select student_batch ,sum(students_marks) from ineuron_students group by student_batch
 select student_batch ,min(students_marks) from ineuron_students group by student_batch
@@ -39,3 +42,23 @@ select student_batch ,avg(students_marks) from ineuron_students group by student
 select count(student_batch) from ineuron_students
 select count(distinct student_batch) from ineuron_students
 select student_batch , count(*) from ineuron_students group by student_batch
+
+
+select * from ineuron_students
+select max(students_marks) from ineuron_students where student_batch='fsda'
+select student_name, student_batch, max(students_marks) from ineuron_students group by student_batch
+
+select student_name,max(students_marks) from ineuron_students where student_batch='fsda'
+
+select student_name from ineuron_students where students_marks in 
+(select max(students_marks) from ineuron_students where student_batch="fsda")
+
+select student_name from ineuron_students where student_batch='fsda' order by students_marks DESC limit 2
+
+select * from ineuron_students
+
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 1,1;
+
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 1,1
+
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 2,2
