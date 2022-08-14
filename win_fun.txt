@@ -8,7 +8,7 @@ student_stream varchar(30),
 students_marks int ,
 student_mail_id varchar(50))
 
-insert into ineuron_students values(101 ,'fsda' , 'saurabh','cs',80,'saurabh@gmail.com')
+insert into ineuron_students values(119 ,'fsbc' , 'sandeep','ECE',65,'sandeep@gmail.com')
 
 select * from ineuron_students
 
@@ -62,3 +62,40 @@ select * from ineuron_students where student_batch = 'fsda' order by students_ma
 select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 1,1
 
 select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 2,2
+
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 2 , 1
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 3, 1
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 4 , 1
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 5 , 1
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 6 , 1
+
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 3, 3
+
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 3
+
+select * from ineuron_students where student_batch = 'fsda' order by students_marks desc limit 2, 3
+
+
+select * from ineuron_students where students_marks =(
+select min(students_marks) from 
+(select students_marks from ineuron_students 
+where student_batch ="fsda"
+order by students_marks desc
+limit 3 ) as top);
+
+
+select students_marks from ineuron_students 
+where student_batch ="fsda" order by students_marks desc limit 3
+
+select * from ineuron_students
+
+select student_id , student_batch , student_stream,students_marks ,
+row_number() over(order by students_marks) as 'row_number' from ineuron_students
+ 
+select * from (select student_id , student_batch , student_stream,students_marks ,
+row_number() over(partition by student_batch order by students_marks desc) as 'row_num' 
+from ineuron_students ) as test where row_num = 1
+
+select student_id , student_batch , student_stream,students_marks ,
+row_number() over(partition by student_batch order by students_marks desc ) as 'row_num' 
+from ineuron_students 
